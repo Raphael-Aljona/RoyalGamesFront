@@ -1,0 +1,29 @@
+.footer{
+    width: 100vw;
+    height: 30vh;
+
+    background: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo_footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.conteudo_footer img {
+    width: 15%;
+}
+
+.texto_footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.texto_footer p{
+    color: var(--texto-claro);
+    text-align: end;
+}

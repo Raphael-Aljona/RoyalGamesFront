@@ -6,8 +6,8 @@
 
 :root{
     --background: linear-gradient(270deg, #221C2D 44.71%, #282047 100%);
-    --homeBackground: linear-gradient(180deg, rgba(82, 59, 255, 0) 0%, rgba(34, 28, 45, 0.5) 81.73%);
-
+    --home-background: radial-gradient(86.81% 50% at 50% 50%, #362968 0%, #2C224C 32.21%, #221B2F 100%);;
+    --background-solid: #221B2F;
 
     --input-color: #D6D2E633;
     --texto-claro:#D6D2E6;

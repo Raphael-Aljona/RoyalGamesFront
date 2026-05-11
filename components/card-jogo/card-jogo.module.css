@@ -1,0 +1,20 @@
+.conteudo_card{
+    border: 1px solid var(--texto-claro);
+    padding: 25px;
+    border-radius: 5px;
+    height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.conteudo_card h2, .conteudo_card p{
+    text-align: center;
+    color: var(--texto-claro);
+}
+
+.conteudo_card img{
+    width: 50%;
+}
