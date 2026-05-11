@@ -1,12 +1,16 @@
 import styles from "./login.module.css"
 import Btn from "../../components/btn/btn";
+import {useState} from "react";
 
 const Login = () => {
+
+
     return (
         <>
             <main className={styles.main}>
-                <img src="/imgs/mulher%20login.png" alt=""/>
-
+                <div className={styles.imagem_lateral}>
+                    <img src="/imgs/mulher%20login.png" alt=""/>
+                </div>
                 <div className={styles.form_login}>
                     <img className={styles.logo} src="/imgs/Logo%20Header.png" alt=""/>
                     <form className={styles.campos_login} action="">
