@@ -1,0 +1,16 @@
+* {
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+:root{
+    --background: linear-gradient(270deg, #221C2D 44.71%, #282047 100%);
+
+    --input-color: #D6D2E633;
+    --texto-claro:#D6D2E6;
+    --fundo-vermelho: #FF004C;
+}
+
+.container-grid{
+    width: 80%;
+}
