@@ -1,0 +1,31 @@
+.header{
+    height: 100px;
+    background: var(--background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navegacao{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navegacao img{
+    width: 20%;
+    object-fit: contain;
+}
+
+.botoes {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.botoes a{
+    text-decoration: none;
+    color: var(--texto-claro);
+    font-size: 25px;
+}

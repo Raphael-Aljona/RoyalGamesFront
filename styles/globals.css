@@ -1,10 +1,13 @@
 * {
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 :root{
     --background: linear-gradient(270deg, #221C2D 44.71%, #282047 100%);
+    --homeBackground: linear-gradient(180deg, rgba(82, 59, 255, 0) 0%, rgba(34, 28, 45, 0.5) 81.73%);
+
 
     --input-color: #D6D2E633;
     --texto-claro:#D6D2E6;
