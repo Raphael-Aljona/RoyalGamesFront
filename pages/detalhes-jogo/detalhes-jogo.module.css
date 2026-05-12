@@ -1,0 +1,53 @@
+.main {
+    height: 100vh;
+    background: var(--home-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main h1{
+    text-align: center;
+    border-bottom: 1px solid var(--fundo-vermelho);
+}
+
+.conteudo {
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.conteudo h2{
+    text-align: center;
+}
+
+.detalhes_jogo{
+    display: flex;
+}
+
+.detalhes_jogo img{
+    width: 50%;
+    object-fit: cover;
+}
+
+.textos_jogo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.informacoes_comprar{
+    display: flex;
+    justify-content: space-around;
+}
+
+.informacoes_comprar .direita, .informacoes_comprar .esquerda{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}

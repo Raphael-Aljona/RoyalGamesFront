@@ -7,10 +7,12 @@
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-titulo);
+    color: var(--texto-claro);
 }
 
 p, input, select, option, a, button {
     font-family: var(--font-padrao);
+    color: var(--texto-claro);
 }
 
 :root {
