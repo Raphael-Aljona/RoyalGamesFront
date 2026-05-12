@@ -2,18 +2,36 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
-:root{
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titulo);
+}
+
+p, input, select, option, a, button {
+    font-family: var(--font-padrao);
+}
+
+:root {
     --background: linear-gradient(270deg, #221C2D 44.71%, #282047 100%);
     --home-background: radial-gradient(86.81% 50% at 50% 50%, #362968 0%, #2C224C 32.21%, #221B2F 100%);;
     --background-solid: #221B2F;
 
     --input-color: #D6D2E633;
-    --texto-claro:#D6D2E6;
+    --texto-claro: #D6D2E6;
     --fundo-vermelho: #FF004C;
 }
 
-.container-grid{
+.container-grid {
     width: 80%;
+}
+
+.glass-container {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0);
+    border-radius: 4px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, .5) inset, -2px -2px 5px rgba(255, 255, 255, .25) inset;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }

@@ -19,8 +19,8 @@ const Index = () => {
                                 completos antes de escolher sua próxima aventura. Seu próximo jogo favorito começa
                                 aqui.</p>
                         </div>
-                        <img src="/imgs/Imagem%20Banner.png" alt=""/>
                     </div>
+                    <img src="/imgs/Imagem%20Banner.png" alt=""/>
                 </section>
                 <section className={styles.catalogo}>
                     <h2>Catálogo de jogos</h2>
@@ -29,7 +29,7 @@ const Index = () => {
                 <section className={styles.pre_footer}>
                     <div className={`container-grid ${styles.conteudo}`}>
                         <h2>Jogos online podem afetar o comportamento humano?</h2>
-                        <div className={styles.imagem_jogos}>
+                        <div className={`glass-container ${styles.imagem_jogos}`}>
                             <img src="/imgs/lol.png" alt=""/>
                             <img src="/imgs/counter_strike.png" alt=""/>
                         </div>

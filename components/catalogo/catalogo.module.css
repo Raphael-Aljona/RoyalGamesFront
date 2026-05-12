@@ -1,6 +1,8 @@
 .conteudo_lista{
     display: flex;
-    gap: 10px;
+    /*gap: 10px;*/
+    height: 100%;
+    justify-content: space-around;
     flex-direction: column;
 }
 
@@ -11,12 +13,11 @@
 }
 
 .pesquisa input{
-    width: 100%;
+    width: 68%;
+    box-sizing: border-box;
 }
 
 .pesquisa input, .pesquisa select{
-    border: 1px solid var(--texto-claro);
-    border-radius: 4px;
     background-color: var(--input-color);
 
     color: var(--texto-claro);
@@ -33,4 +34,5 @@
 .paginas {
     display: flex;
     gap: 15px;
+    justify-content: center;
 }

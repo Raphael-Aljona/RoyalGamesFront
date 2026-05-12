@@ -1,10 +1,16 @@
 .botao{
     background-color: transparent;
     border: 2px solid var(--fundo-vermelho);
-    height: 40px;
-    width: 50%;
 
     font-size: 25px;
     color: var(--texto-claro);
     border-radius: 4px;
+
+    padding: 10px;
 }
+
+/*@media screen and (max-width: 1024){*/
+/*    .botao{*/
+/*        font-size: 15px;*/
+/*    }*/
+/*}*/
