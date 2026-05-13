@@ -3,6 +3,7 @@ import type {AppProps} from "next/app";
 import "../styles/globals.css"
 import { Orbitron } from "next/font/google";
 import { Exo_2 } from "next/font/google";
+import {ToastContainer} from "react-toastify";
 
 
 const orbitron = Orbitron({
@@ -22,6 +23,7 @@ export default function App({Component, pageProps}: AppProps) {
 
         <main className={`${orbitron.variable} ${exo2.variable}`}>
             <Component {...pageProps} />
+            <ToastContainer></ToastContainer>
         </main>
     )
 
