@@ -5,8 +5,12 @@ import CardJogo from "../../components/card-jogo/card-jogo";
 import Catalogo from "../../components/catalogo/catalogo"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Footer from "../../components/footer/footer";
+import {erro} from "@/utils/toast";
+import {getJogos} from "../api/jogoService";
+import {useEffect} from "react";
 
 const Index = () => {
+
     return (
         <>
             <Header></Header>
