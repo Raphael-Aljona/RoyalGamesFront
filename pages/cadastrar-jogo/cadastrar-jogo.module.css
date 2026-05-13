@@ -45,6 +45,14 @@
     width: 100%;
 }
 
+.campo_direita .campo_texto{
+    height: 100%;
+}
+
+.campo_texto textarea{
+    height: 100%;
+}
+
 .campos_esquerda{
     display: flex;
     flex-direction: column;
@@ -81,10 +89,12 @@
 
 .catalogo{
     background: var(--home-background);
+    padding: 50px 0;
+    height: 110vh;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 

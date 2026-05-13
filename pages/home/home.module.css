@@ -32,10 +32,13 @@
 /*SEÇÃO CATÁLOGO*/
 
 .catalogo {
-    height: 100vh;
     background-color: var(--background-solid);
+    padding: 50px 0;
+    height: 110vh;
+
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 

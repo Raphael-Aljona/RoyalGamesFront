@@ -57,10 +57,8 @@ const CadastrarJogo = () => {
 
                 </section>
                 <section className={styles.catalogo}>
-                    <div className={`container-grid ${styles.conteudo_catalogo}`}>
-                        <h2>Lista de Jogos</h2>
-                        <Catalogo></Catalogo>
-                    </div>
+                    <h2>Lista de Jogos</h2>
+                    <Catalogo></Catalogo>
                 </section>
             </main>
             <Footer></Footer>
