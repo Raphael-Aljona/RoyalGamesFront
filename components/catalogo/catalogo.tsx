@@ -12,7 +12,7 @@ import {useEffect, useState} from "react";
 interface Jogo {
     nome: string;
     jogoID: number;
-    imagem: string;
+    imagemUrl: string;
     descricao: string;
     preco: number;
 }
@@ -49,11 +49,12 @@ const Catalogo = () => {
                 <div className={styles.lista_jogos}>
 
                     {lista.map(
-                        value => (
+                        (value) => (
                             <CardJogo key={value.jogoID}
                                       jogoID={value.jogoID}
                                       nome={value.nome}
-                                      preco={value.preco} imagem={value.imagem}></CardJogo>
+                                      preco={value.preco}
+                                      imagemUrl={value.imagemUrl}></CardJogo>
                         )
                     )}
                 </div>

@@ -5,20 +5,20 @@ import {router} from "next/client";
 type Jogo = {
     jogoID: number;
     nome: string;
-    imagem: string;
+    imagemUrl: string;
     preco: number;
 }
 
-const CardJogo = ({nome, jogoID, preco, imagem}:Jogo) => {
+const CardJogo = ({nome, jogoID, preco, imagemUrl}:Jogo) => {
     // {imagem.length < 0 ? "/imgs/card-cod.png" : "imagem real"}
     return (
         <>
             <article className={`glass-container ${styles.conteudo_card}`}>
-                <img src="/imgs/card-cod.png" alt=""/>
+                <img src={imagemUrl} alt=""/>
                 <h2>{nome}</h2>
                 <p>{preco}</p>
                 <Btn onclick={() => {
-                    router.push("/detalhes-jogo")
+                    router.push(`/detalhes-jogo/${jogoID}`);
                 }}>Detalhes</Btn>
             </article>
         </>

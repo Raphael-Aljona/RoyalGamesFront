@@ -10,3 +10,14 @@ export async function getJogos (){
         throw new Error(e.message);
     }
 }
+
+export async function getJogoById (id:number){
+    try{
+        const response = await api.get(`/Jogo/${id}`);
+
+        console.log(response.data);
+        return response.data;
+    }catch (e:any){
+        throw new Error(e.message);
+    }
+}
