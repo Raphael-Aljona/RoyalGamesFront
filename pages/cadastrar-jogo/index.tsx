@@ -9,9 +9,15 @@ import {router} from "next/client";
 import {erro} from "@/utils/toast";
 import {cadastrarJogo} from "../api/jogoService";
 import {getPlataforma} from "../api/plataformaService";
+import {getCategorias} from "../api/categoriaService";
 
 type Plataforma = {
     plataformaIds: number;
+    nome: string;
+}
+
+type Categoria = {
+    categoriaID: number;
     nome: string;
 }
 
@@ -28,6 +34,7 @@ const CadastrarJogo = () => {
     const [adminUsuario, setAdminUsuario] = useState<boolean>(false);
 
     const [plataforma, setPlataforma] = useState<Plataforma[]>([]);
+    const [categorias, setCategorias] = useState<Categoria[]>([]);
 
     const token = secureLocalStorage.getItem("token");
 
@@ -62,12 +69,24 @@ const CadastrarJogo = () => {
         }
     }
 
+    async function getListaCategorias() {
+        try {
+            const dados = await getCategorias();
+
+            setCategorias(dados);
+        } catch (err: any) {
+            erro(err.message)
+        }
+    }
+
     useEffect(() => {
         if (token == null) {
             router.push("/home");
+            return;
         }
 
         getListaPlaformas();
+        getListaCategorias();
     }, [])
 
     return (
@@ -95,7 +114,12 @@ const CadastrarJogo = () => {
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Gênero</label>
-                                            <select className={`glass-container`} name="" id=""></select>
+                                            <select className={`glass-container`} name="" id="">
+                                                {categorias.map(value =>
+                                                    (
+                                                        <option key={value.categoriaID}>{value.nome}</option>
+                                                    ))}
+                                            </select>
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Classificação Indicativa</label>
@@ -107,7 +131,8 @@ const CadastrarJogo = () => {
                                             <label htmlFor="">Plataforma</label>
                                             <select className={`glass-container`} name="" id="">
                                                 {plataforma.map(value => (
-                                                    <option key={value.plataformaIds} value={value.nome}>{value.nome}</option>
+                                                    <option key={value.plataformaIds}
+                                                            value={value.nome}>{value.nome}</option>
                                                 ))}
                                             </select>
                                         </div>
