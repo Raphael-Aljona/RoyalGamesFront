@@ -4,7 +4,7 @@ import styles from "./cadastrar-jogo.module.css"
 import Btn from "../../components/btn/btn";
 import Catalogo from "../../components/catalogo/catalogo";
 import secureLocalStorage from "react-secure-storage";
-import {use, useEffect, useState} from "react";
+import {FormEvent, use, useEffect, useState} from "react";
 import {router} from "next/client";
 import {erro} from "@/utils/toast";
 import {cadastrarJogo} from "../api/jogoService";
@@ -12,7 +12,7 @@ import {getPlataforma} from "../api/plataformaService";
 import {getCategorias} from "../api/categoriaService";
 
 type Plataforma = {
-    plataformaIds: number;
+    plataformaID: number;
     nome: string;
 }
 
@@ -20,6 +20,21 @@ type Categoria = {
     categoriaID: number;
     nome: string;
 }
+
+type Classificacao = {
+    classificacao: string,
+    classificacaoIndicativaIds: number,
+}
+
+
+const classificacaoIndicativa: Classificacao[] = [
+    {classificacao: "Livre", classificacaoIndicativaIds: 0},
+    {classificacao: "10+", classificacaoIndicativaIds: 1},
+    {classificacao: "12+", classificacaoIndicativaIds: 2},
+    {classificacao: "14+", classificacaoIndicativaIds: 3},
+    {classificacao: "16+", classificacaoIndicativaIds: 4},
+    {classificacao: "18+", classificacaoIndicativaIds: 5},
+]
 
 const CadastrarJogo = () => {
 
@@ -29,16 +44,17 @@ const CadastrarJogo = () => {
     const [imagem, setImagem] = useState<File | null>(null);
     const [usuarioIds, setUsuarioIds] = useState<number[]>([]);
     const [categoriaIds, setCategoriaIds] = useState<number[]>([]);
-    const [plataformaIds, setPlataformaIds] = useState<number[]>([]);
+    const [plataformaID, setPlataformaIds] = useState<number[]>([]);
     const [classificacaoIndicativaIds, setClassificacaoIndicativaIds] = useState<number[]>([]);
-    const [adminUsuario, setAdminUsuario] = useState<boolean>(false);
+    const [adminUsuario, setAdminUsuario] = useState<boolean>(true);
 
     const [plataforma, setPlataforma] = useState<Plataforma[]>([]);
     const [categorias, setCategorias] = useState<Categoria[]>([]);
 
     const token = secureLocalStorage.getItem("token");
 
-    async function cadastrarNovoJogo() {
+    async function cadastrarNovoJogo(e:FormEvent<HTMLFormElement>) {
+        e.preventDefault();
         try {
             const dados = {
                 nome,
@@ -47,23 +63,27 @@ const CadastrarJogo = () => {
                 imagem,
                 usuarioIds,
                 categoriaIds,
-                plataformaIds,
+                plataformaID,
                 classificacaoIndicativaIds,
                 adminUsuario,
             }
 
-            await cadastrarJogo(dados);
+            console.log(dados);
+
+            // await cadastrarJogo(dados);
         } catch (e: any) {
             erro(e.message)
         }
     }
+
+    console.log(plataforma);
+    console.log(plataformaID);
 
     async function getListaPlaformas() {
         try {
             const dados = await getPlataforma();
 
             setPlataforma(dados)
-            console.log(dados);
         } catch (err: any) {
             erro(err.message)
         }
@@ -87,6 +107,7 @@ const CadastrarJogo = () => {
 
         getListaPlaformas();
         getListaCategorias();
+
     }, [])
 
     return (
@@ -96,7 +117,7 @@ const CadastrarJogo = () => {
                 <section className={styles.cadastrar_jogo}>
                     <div className={`${styles.conteudo_form} glass-container container-grid`}>
                         <h1>Cadastrar novo jogo</h1>
-                        <form action="">
+                        <form action="" onSubmit={cadastrarNovoJogo}>
                             <div className={styles.form}>
                                 <div className={styles.campos_esquerda}>
                                     <div className={`${styles.campo_texto}`}>
@@ -114,25 +135,44 @@ const CadastrarJogo = () => {
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Gênero</label>
-                                            <select className={`glass-container`} name="" id="">
+                                            <select multiple className={`glass-container`} name="" id="" value={categoriaIds} onChange={event => {
+                                                setCategoriaIds(
+                                                    Array.from(event.target.selectedOptions).map((options) => Number(options.value))
+                                                )
+                                            }}>
                                                 {categorias.map(value =>
                                                     (
-                                                        <option key={value.categoriaID}>{value.nome}</option>
+                                                        <option key={value.categoriaID} value={value.categoriaID}>{value.nome}</option>
                                                     ))}
                                             </select>
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Classificação Indicativa</label>
-                                            <select className={`glass-container`} name="" id=""></select>
+                                            <select className={`glass-container`} name="" id="" value={classificacaoIndicativaIds.toString()} onChange={event => {
+                                                setClassificacaoIndicativaIds(
+                                                    Array.from(event.target.selectedOptions).map((option) => Number(option.value))
+                                                )
+                                            }}>
+                                                <option value="" disabled selected>Ex: Livre</option>
+                                                {classificacaoIndicativa.map(value =>(
+                                                    <option key={value.classificacaoIndicativaIds} value={value.classificacaoIndicativaIds}>{value.classificacao}</option>
+                                                ))}
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div className={styles.campos_baixo}>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Plataforma</label>
-                                            <select className={`glass-container`} name="" id="">
+                                            <select multiple className={`glass-container`} name="" id="" value={plataformaID} onChange={event => {
+                                                setPlataformaIds(
+                                                    Array.from(event.target.selectedOptions).map((options) => Number(options.value))
+                                                )
+                                            }}>
+
                                                 {plataforma.map(value => (
-                                                    <option key={value.plataformaIds}
-                                                            value={value.nome}>{value.nome}</option>
+                                                    <option key={value.plataformaID}
+                                                            value={value.plataformaID}>{value.nome}</option>
                                                 ))}
                                             </select>
                                         </div>
