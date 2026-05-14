@@ -3,8 +3,21 @@ import Footer from "../../components/footer/footer";
 import styles from "./cadastrar-jogo.module.css"
 import Btn from "../../components/btn/btn";
 import Catalogo from "../../components/catalogo/catalogo";
+import secureLocalStorage from "react-secure-storage";
+import {use, useEffect} from "react";
+import {router} from "next/client";
 
 const CadastrarJogo = () => {
+
+    const token = secureLocalStorage.getItem("token");
+
+    useEffect(() => {
+        if (token == null) {
+            router.push("/home");
+        }
+
+    },[])
+
     return (
         <>
             <Header></Header>

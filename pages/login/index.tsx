@@ -16,7 +16,7 @@ const Login = () => {
             await Autenticar(email, senha)
             notificacao("Logado com sucesso!");
             setTimeout(() => {
-                router.push("/home")
+                router.push("/cadastrar-jogo")
 
             }, 2000)
         } catch (err: any) {
@@ -30,7 +30,7 @@ const Login = () => {
                 <div className={styles.imagem_lateral}>
                     <img src="/imgs/mulher%20login.png" alt=""/>
                 </div>
-                <div className={styles.form_login}>
+                <div className={`glass-container ${styles.form_login}`}>
                     <img className={styles.logo} src="/imgs/Logo%20Header.png" alt=""/>
                     <form onSubmit={login} className={styles.campos_login} action="">
                         <div className={styles.campo_texto}>
