@@ -2,6 +2,7 @@
     padding: 25px;
     border-radius: 5px;
     height: 350px;
+    max-width: 300px;
 
     display: flex;
     flex-direction: column;
@@ -16,5 +17,6 @@
 
 .conteudo_card img{
     width: 70%;
+    max-width: 200px;
 }
 
