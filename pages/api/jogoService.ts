@@ -44,7 +44,12 @@ export async function getJogoById(id: number) {
     try {
         const response = await api.get(`/Jogo/${id}`);
 
-        return response.data;
+        const produto = {
+            ...response.data,
+            imagemUrl: `${api.defaults.baseURL}${response.data.imagemUrl}`,
+        }
+
+        return produto;
     } catch (e: any) {
         throw new Error(e.message);
     }
