@@ -8,7 +8,7 @@ type Jogo = {
     imagem: File | null,
     usuarioIds: number[],
     categoriaIds: number[],
-    plataformaIds: number[],
+    plataformaID: number[],
     classificacaoIndicativaIds: number[],
     adminUsuario: boolean,
 }
@@ -39,6 +39,16 @@ export async function cadastrarJogo(dados: Jogo) {
     const formData = new FormData();
 
     try {
+        console.log(`dados: ${dados.nome}`);
+        console.log(`dados: ${dados.adminUsuario}`);
+        console.log(`dados: ${dados.imagem}`);
+        console.log(`dados: ${dados.usuarioIds}`);
+        console.log(`dados: ${dados.preco}`);
+        console.log(`dados: ${dados.categoriaIds}`);
+        console.log(`dados: ${dados.classificacaoIndicativaIds}`);
+        console.log(`dados: ${dados.descricao}`);
+        console.log(`dados: ${dados.plataformaID}`);
+
         formData.append("Nome", dados.nome,);
         formData.append("Preco", dados.preco.toString(),);
         formData.append("Descricao", dados.descricao,);
@@ -51,7 +61,7 @@ export async function cadastrarJogo(dados: Jogo) {
         dados.categoriaIds.forEach(value => {
             formData.append("CategoriaIds", value.toString(),);
         })
-        dados.plataformaIds.forEach(value => {
+        dados.plataformaID.forEach(value => {
             formData.append("PlataformaIds", value.toString(),);
         })
         dados.classificacaoIndicativaIds.forEach(value => {
@@ -60,7 +70,6 @@ export async function cadastrarJogo(dados: Jogo) {
         formData.append("AdminUsuario", dados.adminUsuario.toString(),);
 
         await api.post("/Jogo", formData)
-        console.log(dados);
     } catch (e: any) {
         throw new Error(e.message);
     }

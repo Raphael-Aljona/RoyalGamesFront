@@ -10,6 +10,7 @@ import {erro} from "@/utils/toast";
 import {cadastrarJogo} from "../api/jogoService";
 import {getPlataforma} from "../api/plataformaService";
 import {getCategorias} from "../api/categoriaService";
+import {jwtDecode} from "jwt-decode";
 
 type Plataforma = {
     plataformaID: number;
@@ -36,6 +37,10 @@ const classificacaoIndicativa: Classificacao[] = [
     {classificacao: "18+", classificacaoIndicativaIds: 5},
 ]
 
+type tokenDecoded = {
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": number
+}
+
 const CadastrarJogo = () => {
 
     const [nome, setNome] = useState<string>("");
@@ -53,7 +58,7 @@ const CadastrarJogo = () => {
 
     const token = secureLocalStorage.getItem("token");
 
-    async function cadastrarNovoJogo(e:FormEvent<HTMLFormElement>) {
+    async function cadastrarNovoJogo(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
             const dados = {
@@ -70,14 +75,20 @@ const CadastrarJogo = () => {
 
             console.log(dados);
 
-            // await cadastrarJogo(dados);
+            await cadastrarJogo(dados);
         } catch (e: any) {
             erro(e.message)
         }
     }
 
-    console.log(plataforma);
-    console.log(plataformaID);
+    async function getUsuarioId(){
+        const token = secureLocalStorage.getItem("token");
+
+        const teste = jwtDecode<tokenDecoded>(token)
+        const idUsuario = teste["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]
+
+        await setUsuarioIds([idUsuario]);
+    }
 
     async function getListaPlaformas() {
         try {
@@ -107,8 +118,11 @@ const CadastrarJogo = () => {
 
         getListaPlaformas();
         getListaCategorias();
+        getUsuarioId();
 
     }, [])
+
+    console.log(plataformaID);
 
     return (
         <>
@@ -135,27 +149,31 @@ const CadastrarJogo = () => {
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Gênero</label>
-                                            <select multiple className={`glass-container`} name="" id="" value={categoriaIds} onChange={event => {
+                                            <select multiple className={`glass-container`} name="" id=""
+                                                    value={categoriaIds} onChange={event => {
                                                 setCategoriaIds(
                                                     Array.from(event.target.selectedOptions).map((options) => Number(options.value))
                                                 )
                                             }}>
                                                 {categorias.map(value =>
                                                     (
-                                                        <option key={value.categoriaID} value={value.categoriaID}>{value.nome}</option>
+                                                        <option key={value.categoriaID}
+                                                                value={value.categoriaID}>{value.nome}</option>
                                                     ))}
                                             </select>
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Classificação Indicativa</label>
-                                            <select className={`glass-container`} name="" id="" value={classificacaoIndicativaIds.toString()} onChange={event => {
+                                            <select className={`glass-container`} name="" id=""
+                                                    value={classificacaoIndicativaIds.toString()} onChange={event => {
                                                 setClassificacaoIndicativaIds(
                                                     Array.from(event.target.selectedOptions).map((option) => Number(option.value))
                                                 )
                                             }}>
                                                 <option value="" disabled selected>Ex: Livre</option>
-                                                {classificacaoIndicativa.map(value =>(
-                                                    <option key={value.classificacaoIndicativaIds} value={value.classificacaoIndicativaIds}>{value.classificacao}</option>
+                                                {classificacaoIndicativa.map(value => (
+                                                    <option key={value.classificacaoIndicativaIds}
+                                                            value={value.classificacaoIndicativaIds}>{value.classificacao}</option>
                                                 ))}
 
                                             </select>
@@ -164,7 +182,8 @@ const CadastrarJogo = () => {
                                     <div className={styles.campos_baixo}>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Plataforma</label>
-                                            <select multiple className={`glass-container`} name="" id="" value={plataformaID} onChange={event => {
+                                            <select multiple className={`glass-container`} name="" id=""
+                                                    value={plataformaID} onChange={event => {
                                                 setPlataformaIds(
                                                     Array.from(event.target.selectedOptions).map((options) => Number(options.value))
                                                 )
@@ -178,7 +197,11 @@ const CadastrarJogo = () => {
                                         </div>
                                         <div className={`${styles.campo_texto}`}>
                                             <label htmlFor="">Imagem</label>
-                                            <input className={`glass-container`} type="image"/>
+                                            <input className={`glass-container`} type="file" onChange={event => {
+                                                if (event.target.files && event.target.files[0]) {
+                                                    setImagem(event.target.files[0])
+                                                }
+                                            }}/>
                                         </div>
                                     </div>
                                 </div>

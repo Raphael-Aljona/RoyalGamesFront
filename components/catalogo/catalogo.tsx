@@ -49,7 +49,8 @@ const Catalogo = () => {
                 <div className={styles.lista_jogos}>
 
                     {lista.map(
-                        (value) => (
+                        (value, ) => (
+
                             <CardJogo key={value.jogoID}
                                       jogoID={value.jogoID}
                                       nome={value.nome}

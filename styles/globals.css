@@ -10,7 +10,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--texto-claro);
 }
 
-p, input, select, option, a, button, label, li, ul {
+p, input, select, option, a, button, label, li, ul, textarea {
     font-family: var(--font-padrao);
     color: var(--texto-claro);
 }
